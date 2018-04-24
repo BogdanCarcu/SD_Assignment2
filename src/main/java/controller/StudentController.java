@@ -59,7 +59,7 @@ public class StudentController {
 	    }
 
 	    @PutMapping("")
-	    public Student updateBook(@RequestBody Student student) {
+	    public Student updateStudent(@RequestBody Student student) {
 	        try {
 	            return studentService.updateStudent(student.getStudentId(), student);
 	            
@@ -70,7 +70,7 @@ public class StudentController {
 	    }
 
 	    @DeleteMapping("{id}")
-	    public String deleteBookById(@PathVariable(value = "id") Long studentId) {
+	    public String deleteStudentById(@PathVariable(value = "id") Long studentId) {
 	        try {
 	            studentService.deleteStudentById(studentId);
 	            return "Student with id = " + studentId + " successful deleted!";
