@@ -1,14 +1,14 @@
 package dao;
 
-import dao.dbmodel.BookDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import dao.dbmodel.LaboratoryClassDto;
 
 @Repository
 @Transactional 
-public interface BookRepositoryInterface extends JpaRepository<BookDto, Long>{
+public interface ILaboratoryClassRepository extends JpaRepository<LaboratoryClassDto, Long>{
 	
-	  BookDto findByTitleAndAuthor(String title, String author);
+	public LaboratoryClassDto findByTitle(String title);
 	
 }
