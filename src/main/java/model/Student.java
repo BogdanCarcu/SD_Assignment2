@@ -42,9 +42,9 @@ public class Student implements IUser{
 		return studentId;
 	}
 
-	/*public void setStudentId(Long studentId) {
+	public void setStudentId(Long studentId) {
 		this.studentId = studentId;
-	}*/
+	}
 
 	public String getFirstName() {
 		return firstName;

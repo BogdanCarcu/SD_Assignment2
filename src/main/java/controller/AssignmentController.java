@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import model.Assignment;
@@ -27,8 +28,11 @@ public class AssignmentController {
 	}
 	
 	 @GetMapping("")
-	    public List<Assignment> getAllAssignments() {
+	    public List<Assignment> getAllAssignments(@RequestParam(required=false) Long labId) {
 	        try {
+	        	if(labId != null)
+	        		return aService.findAllAssignmentsByLaboratoryClass(labId);
+	        		
 	            return aService.getAllAssignments();
 	        } catch (Exception e) {
 	            e.printStackTrace();

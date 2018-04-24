@@ -25,7 +25,7 @@ public class LoginController {
 	}
 	
 	@GetMapping("")
-	public IUser studentLogin(String email, String password) {
+	public IUser login(String email, String password) {
 		
 		try {
 			

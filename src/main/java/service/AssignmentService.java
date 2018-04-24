@@ -17,6 +17,6 @@ public interface AssignmentService {
 
     void deleteAssignmentById(Long assignmentId);
     
-    List<Assignment> findAllAssignmentsByLaboratoryClass(LaboratoryClass laboratoryClass);
+    List<Assignment> findAllAssignmentsByLaboratoryClass(Long labId);
 
 }

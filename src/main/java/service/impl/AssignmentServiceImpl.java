@@ -12,7 +12,6 @@ import dao.IAssignmentRepository;
 import dao.dbmodel.AssignmentDto;
 import dao.dbmodel.LaboratoryClassDto;
 import model.Assignment;
-import model.LaboratoryClass;
 import service.AssignmentService;
 import service.mapper.LaboratoryIdMapper;
 import service.mapper.LaboratorySaveMapper;
@@ -96,10 +95,12 @@ public class AssignmentServiceImpl implements AssignmentService{
 	}
 
 	@Override
-	public List<Assignment> findAllAssignmentsByLaboratoryClass(LaboratoryClass laboratoryClass) {
+	public List<Assignment> findAllAssignmentsByLaboratoryClass(Long labId) {
 		
-		LaboratoryClassDto dto = myMapper.map(laboratoryClass, LaboratoryClassDto.class);
-		List<AssignmentDto> assignments = assignmentRepository.findAllByLaboratoryClass(dto);
+		LaboratoryClassDto lab = new LaboratoryClassDto();
+		lab.setLabId(labId);
+		
+		List<AssignmentDto> assignments = assignmentRepository.findAllByLaboratoryClass(lab);
 		List<Assignment> result = new ArrayList<Assignment>();
 		
 		for(AssignmentDto a : assignments) {

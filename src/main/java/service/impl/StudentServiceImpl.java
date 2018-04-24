@@ -38,6 +38,7 @@ public class StudentServiceImpl implements StudentService{
 	    return generatedString;
 	}
 	
+	
 	@Autowired
 	public StudentServiceImpl(IStudentRepository studentRepository) {
 	        this.studentRepository = studentRepository;
@@ -99,6 +100,8 @@ public class StudentServiceImpl implements StudentService{
 
         if (studentToBeUpdated != null) {
         	
+        	newStudentDto.setToken(studentToBeUpdated.get().getToken());
+        	student.setToken(studentToBeUpdated.get().getToken());
             studentRepository.save(newStudentDto);
             
             return student;
