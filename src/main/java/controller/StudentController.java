@@ -78,33 +78,6 @@ public class StudentController {
 	            return e.getMessage();
 	        }
 	    }
-	    
-	    /*@GetMapping("")
-	    public Student registerStrudent(String token, String email, String password) {
-	    	
-	    	   try {
-		            Student s = studentService.register(token, email, password);
-		            return s;
-		            
-		        } catch (Exception e) {
-		           
-		        	return null;
-		        }
-	
-	    }
-	    
-	    @GetMapping("")
-	    public Student login(String email, String password) {
-	    	
-	    	 try {
-		            Student s = studentService.login(email, password);
-		            return s;
-		            
-		        } catch (Exception e) {
-		           
-		        	return null;
-		        }
-	    	
-	    }*/
+
 
 }

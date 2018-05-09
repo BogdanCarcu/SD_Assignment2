@@ -30,7 +30,7 @@ public class SubmissionController {
 		}
  
 		@GetMapping("")
-	    public List<Submission> getASubmissionsById(@RequestParam(required = false) Long studentId, 
+	    public List<Submission> getAllSubmissionsById(@RequestParam(required = false) Long studentId, 
 	    									@RequestParam(required = false) Long assignmentId) {
 	        try {
 	        	
@@ -45,8 +45,14 @@ public class SubmissionController {
 	        	
 	        	Submission unique = subService.getSubmissionByStudentAndAssignment(studentId, assignmentId);
 	        	List<Submission> oneAttList = new ArrayList<Submission>();
-	        	oneAttList.add(unique);
 	        	
+	        	if(unique != null) {
+	      
+	        		oneAttList.add(unique);
+	        		
+	        	} else
+	        		return null;
+	        	  	
 	            return oneAttList;
 	            
 	        } catch (Exception e) {
@@ -65,37 +71,13 @@ public class SubmissionController {
 	        }
 	    }
 	    
-	   /* @PutMapping("")
-	    public Submission updateSubmission(@RequestBody Submission submission) {
-	        try {
-	            return subService.updateSubmission(submission);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return null;
-	        }
-	    }
-	   */
 	 	
 	 	 @PutMapping("")
 	 	 public boolean updateSubmission(@RequestParam Long studentId, @RequestParam Long assignmentId, 
-	 			 			@RequestParam(required = false) Float grade,
 	 			 			@RequestParam(required = false) String remark,
 	 			 			@RequestParam(required = false) String gitLink) {
-	 		 
-	 		 if(grade != null && remark == null && gitLink == null) {
-	 		 
-		        try {
-		        	return subService.markSubmission(studentId, assignmentId, grade);
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		            
-		            return false;
-		        }
-		        
-	 		 }
-	 		 
-	 		if(grade == null && remark != null && gitLink != null) {
-	 			
+	 		
+	 	
 	 			 try {
 			            return subService.resubmit(studentId, assignmentId, remark, gitLink);
 			            
@@ -104,10 +86,7 @@ public class SubmissionController {
 			            
 			            return false;
 			        }
-	 			
-	 		}
-	 		 
-	 		 return false;
+	 		
 	 	 }
 	 	 
 	    @DeleteMapping("")

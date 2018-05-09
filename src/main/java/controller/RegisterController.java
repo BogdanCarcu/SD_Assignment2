@@ -1,7 +1,7 @@
 package controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +21,8 @@ public class RegisterController {
 		
 	}
 	
-	@GetMapping("")
-	public Student studentLogin(String token, String email, String password) {
+	@PutMapping("")
+	public Student studentRegister(String token, String email, String password) {
 		
 		try {
 			

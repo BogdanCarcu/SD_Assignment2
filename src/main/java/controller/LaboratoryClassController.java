@@ -77,7 +77,7 @@ public class LaboratoryClassController {
 	    }
 
 	    @DeleteMapping("{id}")
-	    public String deleteBookById(@PathVariable(value = "id" ) Long labId) {
+	    public String deleteLaboratoryClassById(@PathVariable(value = "id" ) Long labId) {
 	        try {
 	            labService.deleteLaboratoryClassById(labId);
 	            return "Laboratory Class with id = " + labId + " successful deleted!";

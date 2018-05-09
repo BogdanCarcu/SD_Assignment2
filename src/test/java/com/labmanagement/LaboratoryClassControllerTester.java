@@ -71,7 +71,7 @@ public class LaboratoryClassControllerTester {
 	 public void testDeleteLaboratoryById()
 	   throws Exception {
 		 
-		 when(controller.deleteBookById((long)1)).thenReturn("Laboratory Class with id = 1 successful deleted!");
+		 when(controller.deleteLaboratoryClassById((long)1)).thenReturn("Laboratory Class with id = 1 successful deleted!");
 	    
 	     mvc.perform(delete("/laboratory/{id}", 1)
 	    	      .contentType(MediaType.APPLICATION_JSON))

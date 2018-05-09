@@ -3,10 +3,20 @@ package service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.Random;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import dao.IStudentRepository;
@@ -20,6 +30,25 @@ public class StudentServiceImpl implements StudentService{
 
 	private final IStudentRepository studentRepository;
 	private ModelMapper myMapper;
+	
+	@Autowired
+	private JavaMailSender sender;
+	
+	private void sendEmail(String destination, String token) throws Exception{
+	
+		       MimeMessage message = sender.createMimeMessage();
+		
+		       MimeMessageHelper helper = new MimeMessageHelper(message);
+		
+		       helper.setTo(destination);
+		
+		       helper.setText(token);
+		
+		       helper.setSubject("Your registration token");
+		        
+		       sender.send(message);
+		    }
+
 	
 	private String generateRandomToken() {
 		
@@ -83,7 +112,14 @@ public class StudentServiceImpl implements StudentService{
 		student.setPassword(null);
 		
         if (studentRepository.findByEmail(student.getEmail()) == null) {
-
+        	
+        	try {
+				sendEmail(student.getEmail(), token);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
             studentRepository.save(studentDto);
             return student;
 

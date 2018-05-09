@@ -100,8 +100,11 @@ public class SubmissionServiceImpl implements SubmissionService{
 		assignment.setAssignmentId(assignmentId);
 		
 		SubmissionDto submission = subRepository.findByStudentAndAssignment(student, assignment);
-		Submission result = myMapper.map(submission, Submission.class);
-		
+		Submission result;
+		if(submission != null)
+			result = myMapper.map(submission, Submission.class);
+		else
+			result = null;
 		return result;
 		
 	}
@@ -126,7 +129,7 @@ public class SubmissionServiceImpl implements SubmissionService{
 			
 			s.setAssignment(assignment);
 			s.setGitLink(submission.getGitLink());
-			s.setGrade(submission.getGrade());
+			s.setGrade(0);
 			s.setRemark(submission.getRemark());
 			s.setStudent(student);
 		
@@ -155,7 +158,6 @@ public class SubmissionServiceImpl implements SubmissionService{
 		SubmissionDto s = subRepository.findByStudentAndAssignment(student, assignment);
 		
 		s.setGitLink(submission.getGitLink());
-		s.setGrade(submission.getGrade());
 		s.setRemark(submission.getRemark());
 		
 		subRepository.save(s);
